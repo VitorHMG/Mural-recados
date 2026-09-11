@@ -1,0 +1,45 @@
+<!-- */Vitor Hugo Magalhaes - 240645 -->
+<!-- //Isabelly Emilye Hoffmann - 252288 -->
+<div class="mural-card">
+	<h2>Mural de Recados</h2>
+
+	<div class="publish">
+		<input
+			type="text"
+			placeholder="Escreva um recado"
+			[(ngModel)]="newRecadoText"
+			(keydown.enter)="publish()"
+		/>
+		<button (click)="publish()" [disabled]="!newRecadoText.trim()">Publicar</button>
+	</div>
+
+	<ul class="lista-recados">
+		<li
+			class="recado-item"
+			*ngFor="let recado of recados"
+			(click)="selectRecado(recado)"
+			[class.read]="selectedRecado === recado && isRead"
+		>
+			<span class="texto">{{ recado }}</span>
+		</li>
+	</ul>
+
+	<ng-container *ngIf="selectedRecado; else noSelection">
+		<div class="detalhe">
+			<h3>Recado selecionado</h3>
+			<p class="texto-selecionado">{{ selectedRecado }}</p>
+
+			<div class="acoes">
+				<button (click)="toggleRead()">
+					{{ isRead ? 'Marcar como Não lido' : 'Marcar como Lido' }}
+				</button>
+				<button (click)="like()">Curtir</button>
+				<span class="likes">Curtidas: {{ likes }}</span>
+			</div>
+		</div>
+	</ng-container>
+
+	<ng-template #noSelection>
+		<div class="detalhe vazio">Nenhum recado selecionado.</div>
+	</ng-template>
+</div>

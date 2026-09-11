@@ -1,0 +1,89 @@
+.mural-card {
+	max-width: 720px;
+	margin: 16px auto;
+	padding: 16px;
+	border-radius: 8px;
+	background: #f7f9fc;
+	box-shadow: 0 2px 6px rgba(16, 24, 40, 0.06);
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.publish {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.publish input[type="text"] {
+	flex: 1;
+	padding: 8px 10px;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+}
+
+.publish button {
+	padding: 8px 12px;
+	border: none;
+	background: #2563eb;
+	color: white;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.publish button[disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.lista-recados {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 12px 0;
+	display: grid;
+	gap: 8px;
+}
+
+.recado-item {
+	padding: 10px;
+	border-radius: 6px;
+	background: white;
+	border: 1px solid #e6eef8;
+	cursor: pointer;
+}
+
+.recado-item.read {
+	background: #eef6ff;
+	color: #6b7280;
+	text-decoration: line-through;
+}
+
+.detalhe {
+	padding: 12px;
+	border-radius: 6px;
+	background: #ffffff;
+	border: 1px solid #e6eef8;
+}
+
+.detalhe.vazio {
+	color: #6b7280;
+	font-style: italic;
+}
+
+.acoes {
+	margin-top: 8px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.acoes button {
+	padding: 6px 10px;
+	border-radius: 6px;
+	border: 1px solid #d1d5db;
+	background: #fff;
+	cursor: pointer;
+}
+
+.likes {
+	font-weight: 600;
+}
