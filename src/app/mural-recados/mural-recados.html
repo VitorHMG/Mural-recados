@@ -1,45 +1,50 @@
-<!-- */Vitor Hugo Magalhaes - 240645 -->
-<!-- //Isabelly Emilye Hoffmann - 252288 -->
-<div class="mural-card">
-	<h2>Mural de Recados</h2>
+<section class="mural-card" aria-labelledby="mural-title">
+  <h2 id="mural-title">Mural de Recados</h2>
 
-	<div class="publish">
-		<input
-			type="text"
-			placeholder="Escreva um recado"
-			[(ngModel)]="newRecadoText"
-			(keydown.enter)="publish()"
-		/>
-		<button (click)="publish()" [disabled]="!newRecadoText.trim()">Publicar</button>
-	</div>
+  <form class="publish" (ngSubmit)="publish()">
+    <label for="novo-recado">Novo recado</label>
+    <input
+      id="novo-recado"
+      name="novo-recado"
+      type="text"
+      placeholder="Escreva um recado"
+      [(ngModel)]="newRecadoText"
+    />
+    <button type="submit" [disabled]="!newRecadoText.trim()">Publicar</button>
+  </form>
 
-	<ul class="lista-recados">
-		<li
-			class="recado-item"
-			*ngFor="let recado of recados"
-			(click)="selectRecado(recado)"
-			[class.read]="selectedRecado === recado && isRead"
-		>
-			<span class="texto">{{ recado }}</span>
-		</li>
-	</ul>
+  <ul class="lista-recados" aria-label="Recados publicados">
+    @for (recado of recados; track recado.id) {
+      <li class="recado-item" [class.read]="recado.isRead">
+        <button
+          type="button"
+          class="recado-button"
+          [attr.aria-current]="selectedRecado === recado ? 'true' : null"
+          (click)="selectRecado(recado)"
+        >
+          {{ recado.text }}
+        </button>
+      </li>
+    }
+  </ul>
 
-	<ng-container *ngIf="selectedRecado; else noSelection">
-		<div class="detalhe">
-			<h3>Recado selecionado</h3>
-			<p class="texto-selecionado">{{ selectedRecado }}</p>
+  <section class="detalhe" aria-labelledby="detalhe-title">
+    <h3 id="detalhe-title">Recado selecionado</h3>
+    @if (selectedRecado; as recado) {
+      <p class="texto-selecionado">{{ recado.text }}</p>
+      <menu class="acoes">
+        <li>
+          <button type="button" (click)="toggleRead()">
+            {{ recado.isRead ? 'Marcar como não lido' : 'Marcar como lido' }}
+          </button>
+        </li>
+        <li><button type="button" (click)="like()">Curtir</button></li>
+        <li class="likes">Curtidas: {{ recado.likes }}</li>
+      </menu>
+    } @else {
+      <p class="vazio">Nenhum recado selecionado.</p>
+    }
+  </section>
+</section>
 
-			<div class="acoes">
-				<button (click)="toggleRead()">
-					{{ isRead ? 'Marcar como Não lido' : 'Marcar como Lido' }}
-				</button>
-				<button (click)="like()">Curtir</button>
-				<span class="likes">Curtidas: {{ likes }}</span>
-			</div>
-		</div>
-	</ng-container>
 
-	<ng-template #noSelection>
-		<div class="detalhe vazio">Nenhum recado selecionado.</div>
-	</ng-template>
-</div>
